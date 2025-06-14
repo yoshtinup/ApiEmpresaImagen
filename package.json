@@ -1,0 +1,16 @@
+{
+  "name": "api_imagenes",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1",
+    "multer": "1.4.4-lts.1",
+    "cors": "^2.8.5"
+  }
+}
