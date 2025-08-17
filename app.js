@@ -94,7 +94,7 @@ app.post('/imagen', upload.single('imagen'), (req, res) => {
     res.status(201).json({
     message: 'Imagen subida exitosamente',
     filename: req.file.filename,
-    url: `http://localhost:${PORT}/imagen/${req.file.filename}`
+    url: `http://75.101.189.104:${PORT}/imagen/${req.file.filename}`
     });
 });
 
@@ -106,7 +106,7 @@ app.post('/excel', uploadExcel.single('excel'), (req, res) => {
     res.status(201).json({
         message: 'Archivo de datos subido exitosamente',
         filename: req.file.filename,
-        url: `http://localhost:${PORT}/excel/${req.file.filename}`
+        url: `http://75.101.189.104:${PORT}/excel/${req.file.filename}`
     });
 });
 
