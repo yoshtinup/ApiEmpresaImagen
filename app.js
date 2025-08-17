@@ -16,10 +16,26 @@ if (!fs.existsSync(UPLOAD_FOLDER)) {
     fs.mkdirSync(UPLOAD_FOLDER);
 }
 
+// Carpeta separada para guardar archivos Excel
+const FILES_FOLDER = './archivos';
+if (!fs.existsSync(FILES_FOLDER)) {
+    fs.mkdirSync(FILES_FOLDER);
+}
+
 // Configuración de almacenamiento de Multer
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, UPLOAD_FOLDER);
+    },
+    filename: (req, file, cb) => {
+        cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
+    }
+});
+
+// Almacenamiento para archivos Excel
+const filesStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, FILES_FOLDER);
     },
     filename: (req, file, cb) => {
         cb(null, file.fieldname + '-' + Date.now() + path.extname(file.originalname));
@@ -49,6 +65,27 @@ const upload = multer({
     }
 });
 
+// Configuración de Multer para subida de archivos Excel
+const uploadExcel = multer({
+    storage: filesStorage,
+    limits: { fileSize: 10 * 1024 * 1024 }, // Tamaño máximo de 10 MB
+    fileFilter: (req, file, cb) => {
+        const ext = path.extname(file.originalname).toLowerCase();
+        const allowedExt = /\.xlsx$|\.xls$|\.csv$/i.test(ext);
+        const allowedMime = [
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'application/vnd.ms-excel',
+            'text/csv',
+            'application/csv'
+        ].includes(file.mimetype);
+
+        if (allowedExt || allowedMime) {
+            return cb(null, true);
+        }
+        cb('Error: Solo se permiten archivos de datos (.xlsx, .xls, .csv)');
+    }
+});
+
 // Ruta para subir una imagen
 app.post('/imagen', upload.single('imagen'), (req, res) => {
     if (!req.file) {
@@ -61,9 +98,31 @@ app.post('/imagen', upload.single('imagen'), (req, res) => {
     });
 });
 
+// Ruta para subir un archivo de datos (Excel, CSV)
+app.post('/excel', uploadExcel.single('excel'), (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: 'No se ha proporcionado ningún archivo o el archivo no es válido' });
+    }
+    res.status(201).json({
+        message: 'Archivo de datos subido exitosamente',
+        filename: req.file.filename,
+        url: `http://localhost:${PORT}/excel/${req.file.filename}`
+    });
+});
+
 // Ruta para obtener una imagen por su nombre de archivo
 app.get('/imagen/:filename', (req, res) => {
     const filePath = path.join(UPLOAD_FOLDER, req.params.filename);
+    if (fs.existsSync(filePath)) {
+        res.sendFile(filePath, { root: '.' });
+    } else {
+        res.status(404).json({ error: 'Archivo no encontrado' });
+    }
+});
+
+// Ruta para obtener un archivo Excel por su nombre de archivo
+app.get('/excel/:filename', (req, res) => {
+    const filePath = path.join(FILES_FOLDER, req.params.filename);
     if (fs.existsSync(filePath)) {
         res.sendFile(filePath, { root: '.' });
     } else {
@@ -79,6 +138,17 @@ app.get('/imagen', (req, res) => {
         }
         const images = files.filter(file => /\.(jpg|jpeg|png|gif)$/i.test(file));
         res.json(images);
+    });
+});
+
+// Ruta para listar todos los archivos Excel
+app.get('/excel', (req, res) => {
+    fs.readdir(FILES_FOLDER, (err, files) => {
+        if (err) {
+            return res.status(500).json({ error: 'Error al leer el directorio' });
+        }
+        const excels = files.filter(file => /\.(xlsx|xls|csv)$/i.test(file));
+        res.json(excels);
     });
 });
 
