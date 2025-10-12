@@ -5,7 +5,7 @@ const fs = require('fs');
 const cors = require('cors');
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 // Configura CORS para permitir todas las solicitudes
 app.use(cors());

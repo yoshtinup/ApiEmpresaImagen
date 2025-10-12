@@ -1,0 +1,11 @@
+Matricula,Nombre,Carrera,EstatusAlumno,CuatrimestreActual,GrupoActual,Materia,Periodo,EstatusMateria,Final,Extra,EstatusCardex,PeriodoCursado,PlanEstudiosClave,Creditos,TutorAcademico
+223200,Juan Pérez,Diseño Gráfico,Inscrito,2,D,Diseño de Interiores,MAYO-AGOSTO 2024,Aprobada,85,73,No vigente,ENERO-ABRIL 2024.1,CON-2020,8,Mtro. Luis Torres
+223201,María López,Contaduría,Inactivo,7,C,Marketing Digital,MAYO-AGOSTO 2024,Reprobada,71,N/A,Vigente,ENERO-ABRIL 2024.1,ISC-2020,10,Lic. Carmen Ruiz
+223202,Carlos Hernández,Arquitectura,Inactivo,8,B,Diseño de Interiores,MAYO-AGOSTO 2024,Reprobada,82,85,No vigente,ENERO-ABRIL 2024.1,CON-2020,8,Dr. María García
+223203,Ana Torres,Contaduría,Inscrito,3,C,Cálculo Diferencial,SEPTIEMBRE-DICIEMBRE 2024,Cursando,90,80,Vigente,SEPTIEMBRE-DICIEMBRE 2024.1,ISC-2020,6,Lic. Carmen Ruiz
+223204,Luis Martínez,Administración,Inactivo,3,D,Programación I,MAYO-AGOSTO 2024,Aprobada,62,N/A,No vigente,SEPTIEMBRE-DICIEMBRE 2024.1,ISC-2020,10,Mtro. Luis Torres
+223205,Sofía Gómez,Ingeniería en Sistemas,Inactivo,1,A,Contabilidad,ENERO-ABRIL 2024,Aprobada,66,69,No vigente,MAYO-AGOSTO 2024.1,ARQ-2020,6,Dr. María García
+223206,Pedro Ramírez,Arquitectura,Inactivo,5,C,Marketing Digital,SEPTIEMBRE-DICIEMBRE 2024,Cursando,61,N/A,No vigente,MAYO-AGOSTO 2024.1,DG-2020,8,Dr. María García
+223207,Laura Castillo,Ingeniería en Sistemas,Inscrito,9,A,Programación I,ENERO-ABRIL 2024,Cursando,64,N/A,No vigente,SEPTIEMBRE-DICIEMBRE 2024.1,ARQ-2020,6,Ing. Jorge Pineda
+223208,Diego Sánchez,Diseño Gráfico,Inscrito,1,B,Programación I,SEPTIEMBRE-DICIEMBRE 2024,Cursando,98,77,No vigente,SEPTIEMBRE-DICIEMBRE 2024.1,ARQ-2020,8,Dr. María García
+223209,Marta Domínguez,Contaduría,Inactivo,4,B,Diseño de Interiores,SEPTIEMBRE-DICIEMBRE 2024,Reprobada,95,63,Vigente,ENERO-ABRIL 2024.1,CON-2020,8,Dr. María García
