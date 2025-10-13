@@ -3,7 +3,7 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const cors = require('cors');
-
+const dotenv = require('dotenv');
 const app = express();
 const PORT = 3001;
 
@@ -94,11 +94,12 @@ app.post('/imagen', upload.single('imagen'), (req, res) => {
     res.status(201).json({
     message: 'Imagen subida exitosamente',
     filename: req.file.filename,
-    url: `http://75.101.189.104:${PORT}/imagen/${req.file.filename}`
+    url: `${process.env.API_ARCHIVO}/imagen/${req.file.filename}`
     });
 });
 
 // Ruta para subir un archivo de datos (Excel, CSV)
+// url: `http://52.71.173.229:${PORT}/imagen/${req.file.filename}`
 app.post('/excel', uploadExcel.single('excel'), (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: 'No se ha proporcionado ningún archivo o el archivo no es válido' });
@@ -106,7 +107,7 @@ app.post('/excel', uploadExcel.single('excel'), (req, res) => {
     res.status(201).json({
         message: 'Archivo de datos subido exitosamente',
         filename: req.file.filename,
-        url: `http://75.101.189.104:${PORT}/excel/${req.file.filename}`
+        url: `${process.env.API_ARCHIVO}/excel/${req.file.filename}`
     });
 });
 
